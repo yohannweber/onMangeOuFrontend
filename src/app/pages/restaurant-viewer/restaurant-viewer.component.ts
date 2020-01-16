@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OnmangeouService, Person, Restaurant } from 'src/app/services/onmangeou.service';
 import { MsalAuthService } from 'src/app/services/msal-auth.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { MessageHandlerService, message } from 'src/app/services/message-handler.service';
 
 @Component({
   selector: 'app-restaurant-viewer',
@@ -14,7 +15,7 @@ export class RestaurantViewerComponent implements OnInit {
   public selectedRestaurantPersons = [];
   public selectedRestaurant = null; 
 
-  constructor(private onMangeOuService: OnmangeouService, public auth : MsalAuthService, private errorHandler : ErrorHandlerService) {
+  constructor(private onMangeOuService: OnmangeouService, public auth : MsalAuthService, private errorHandler : ErrorHandlerService, private messageHandler : MessageHandlerService) {
    }
 
    
@@ -25,6 +26,12 @@ export class RestaurantViewerComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
+    const message : message = {
+      header : "Un nouveau message",
+      details: "Plus de détails sur ce message"
+    }
+    this.messageHandler.handleMessage(message);*/
 
     // Create persons observer object
     const myRestaurantsObserver = {

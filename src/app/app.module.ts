@@ -11,6 +11,7 @@ import { PersonViewComponent } from './components/person-view/person-view.compon
 import { CreateRestaurantComponent } from './pages/create-restaurant/create-restaurant.component';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { ErrorsViewerComponent } from './components/errors-viewer/errors-viewer.component';
+import { MessagesViewerComponent } from './components/messages-viewer/messages-viewer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ErrorsViewerComponent } from './components/errors-viewer/errors-viewer.
     RestaurantsViewComponent,
     PersonViewComponent,
     CreateRestaurantComponent,
-    ErrorsViewerComponent
+    ErrorsViewerComponent,
+    MessagesViewerComponent
   ],
   imports: [
     BrowserModule,

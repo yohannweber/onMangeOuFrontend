@@ -156,7 +156,7 @@ public acquireTokenRedirectAndCallMSGraph() {
         }
     });
 }*/
-public requiresInteraction(errorCode) {
+private requiresInteraction(errorCode) {
     if (!errorCode || !errorCode.length) {
         return false;
     }
