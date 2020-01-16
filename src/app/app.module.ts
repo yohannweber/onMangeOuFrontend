@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,8 @@ import { RestaurantViewerComponent } from './pages/restaurant-viewer/restaurant-
 import { RestaurantsViewComponent } from './components/restaurants-view/restaurants-view.component';
 import { PersonViewComponent } from './components/person-view/person-view.component';
 import { CreateRestaurantComponent } from './pages/create-restaurant/create-restaurant.component';
+import { ErrorHandlerService } from './services/error-handler.service';
+import { ErrorsViewerComponent } from './components/errors-viewer/errors-viewer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { CreateRestaurantComponent } from './pages/create-restaurant/create-rest
     RestaurantViewerComponent,
     RestaurantsViewComponent,
     PersonViewComponent,
-    CreateRestaurantComponent
+    CreateRestaurantComponent,
+    ErrorsViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,9 @@ import { CreateRestaurantComponent } from './pages/create-restaurant/create-rest
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: ErrorHandler, useClass: ErrorHandlerService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

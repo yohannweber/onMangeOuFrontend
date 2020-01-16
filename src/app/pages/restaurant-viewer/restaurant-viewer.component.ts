@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OnmangeouService } from 'src/app/services/onmangeou.service';
+import { OnmangeouService, Person, Restaurant } from 'src/app/services/onmangeou.service';
+import { MsalAuthService } from 'src/app/services/msal-auth.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 
 @Component({
   selector: 'app-restaurant-viewer',
@@ -10,10 +12,9 @@ export class RestaurantViewerComponent implements OnInit {
 
   public restaurants = [];
   public selectedRestaurantPersons = [];
-  public selectedRestaurant = null;
+  public selectedRestaurant = null; 
 
-  constructor(private onMangeOuService: OnmangeouService) {
-    console.log("constructeur comp");
+  constructor(private onMangeOuService: OnmangeouService, public auth : MsalAuthService, private errorHandler : ErrorHandlerService) {
    }
 
    
@@ -24,24 +25,41 @@ export class RestaurantViewerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onMangeOuService.getAllRestaurants().subscribe((data)=>{
+
+    // Create persons observer object
+    const myRestaurantsObserver = {
+      next: (x : Restaurant[]) => { this.restaurants = x 
+                                    this.selectedRestaurant = this.restaurants[0];
+                                    this.onMangeOuService.getAllPersons(this.selectedRestaurant).subscribe(myPersonsObserver);
+                                  },
+      //error: err => console.error('Observer got an error: ' + err),
+      error: err => this.errorHandler.handleError(err),
+      complete: () => console.log('Restaurants Observer got a complete notification '),
+    };
+    
+  // Create persons observer object
+  const myPersonsObserver = {
+    next: (x : Person[]) => this.selectedRestaurantPersons = x,
+    error: err => console.error('Observer got an error: ' + err),
+    complete: () => console.log('Persons Observer got a complete notification '),
+  };
+
+  this.onMangeOuService.getAllRestaurants().subscribe(myRestaurantsObserver);
+   /*this.onMangeOuService.getAllRestaurants().subscribe((data)=>{
     console.log(data);
     this.restaurants = data;
     this.selectedRestaurant = this.restaurants[0];
-    this.onMangeOuService.getAllPersons(this.selectedRestaurant).subscribe((data)=>{
-      console.log(data);
-      this.selectedRestaurantPersons = data;
-      console.log(this.selectedRestaurantPersons);})
+    /*this.onMangeOuService.getAllPersons(this.selectedRestaurant).subscribe((data)=>{
+      this.selectedRestaurantPersons = data;})
     })
-  }
+    
+  });*/
+}
 
 
   showPersons(restaurant){
-    this.onMangeOuService.getAllPersons(restaurant).subscribe((data)=>{
-      console.log(data);
       this.selectedRestaurant = restaurant;
-      this.selectedRestaurantPersons = data;
-      console.log(this.selectedRestaurantPersons);})
+      this.selectedRestaurantPersons = restaurant.persons;
   }
 
 }

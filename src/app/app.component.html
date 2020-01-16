@@ -3,9 +3,32 @@
     On mange où ce midi ?
   </a> 
   <form class="form-inline">
-    <button routerLink="/new/restaurant" class="btn btn-outline-success" type="button">Proposer un restaurant</button>
+    <div class="form-check mb-2 mr-sm-2">
+      <button type="button" class="btn btn-outline-warning" *ngIf="auth.isLogon === true">Pas dispo ce midi</button>
+    </div>
+    <div class="form-check mb-2 mr-sm-2">
+      <button routerLink="/new/restaurant" class="btn btn-outline-success" type="button" *ngIf="auth.isLogon === true">Proposer un restaurant</button>
+    </div>
+    <div class="form-check mb-2 mr-sm-2">
+      <button (click)="auth.signIn()" class="btn btn-outline-success" type="button" *ngIf="auth.isLogon === false">Se connecter</button> 
+    </div>
+    <div class="form-check mb-2 mr-sm-2">
+      <button (click)="auth.signOut()" class="btn btn-outline-success" type="button" *ngIf="auth.isLogon === true">Se déconnecter</button>
+    </div>
+  
   </form>
 </nav>
+<br>
+<app-errors-viewer></app-errors-viewer>
+<!--<div class="container" *ngIf="auth.isLogon === true">
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Vous avez déjà voté aujourd'hui</h4>
+    Vous pouvez changer votre choix en décidant d'aller à un autre endroit ou en indiquant que vous n'êtes pas disponible.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismissInfoMessage()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>-->
 <router-outlet>
 
 </router-outlet>

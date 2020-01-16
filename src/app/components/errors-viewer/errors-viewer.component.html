@@ -1,0 +1,9 @@
+<div class="container" *ngIf="errorHandler.hasErrors() === true">
+    <div class="alert alert-primary alert-danger fade show" role="alert">
+      <h4 class="alert-heading">Des erreurs se sont produites</h4>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="errorHandler.clearErrors()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ errorHandler.error }}
+    </div>
+  </div>

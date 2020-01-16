@@ -1,21 +1,29 @@
-<div class="container">
+<div class="container" >
     <h1>Restaurants pour ce midi</h1>
-    <p>Les restaurants déjà selectionnés pour ce midi. Cliquez sur un bloc pour afficher les personnes voulant y aller</p>
+    <div class="container" *ngIf="restaurants.length === 0">
+    <p>Encore aucun restaurant proposé. Soyez le premier !</p>
+    <button routerLink="/new/restaurant" class="btn btn-outline-success" type="button" *ngIf="auth.isLogon === true">Proposer un restaurant</button>
+    </div>
+    <p *ngIf="restaurants.length > 0">Les restaurants déjà selectionnés pour ce midi. Cliquez sur un bloc pour afficher les personnes voulant y aller</p>
 </div>
 
 <div class="container">
 <app-restaurants-view 
 *ngFor="let restaurant of restaurants"
 [restaurant]="restaurant"
-[selectedRestaurant]="selectedRestaurant"
-(click)="showPersons(restaurant)">
+(click)="showPersons(restaurant)"
+[selectedRestaurant]="selectedRestaurant">
 </app-restaurants-view>
 </div>  
 
 <br><br>
 
-<div class="container">
-    <h1>Et les personnes voulant y aller...</h1>
+<div class="container" *ngIf="restaurants.length > 0">
+    <h1>Et les personnes voulant y aller...  
+        <button class="btn btn-outline-success float-right" type="button" aria-expanded="false" aria-controls="collapseExample" *ngIf="auth.isLogon === true">
+            J'y vais !
+        </button>
+    </h1>
     <app-person-view
     [persons]="selectedRestaurantPersons">
 
