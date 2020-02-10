@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { OnmangeouService, Restaurant, Person } from 'src/app/services/onmangeou.service';
 import { Router } from '@angular/router';
+import { MsalAuthService } from 'src/app/services/msal-auth.service';
 
 @Component({
   selector: 'app-create-restaurant',
@@ -23,7 +24,7 @@ export class CreateRestaurantComponent implements OnInit {
   };
   
 
-  constructor(private onMangeOuService: OnmangeouService, private router : Router) { }
+  constructor(private onMangeOuService: OnmangeouService, private router : Router, private _user : MsalAuthService, private _errorHandler : ErrorHandler) { }
 
   ngOnInit() {
   }
@@ -35,16 +36,16 @@ export class CreateRestaurantComponent implements OnInit {
       name: this.newRestaurant.name,
       type: this.newRestaurant.type,
       descr: this.newRestaurant.descr,
-      persons: [
-        this.newPerson
-      ]
+      persons: []
     };
     console.log(restaurant);
     this.onMangeOuService
     .addRestaurant(restaurant)
-    .subscribe( (data) =>{
+    .subscribe( (data : Restaurant) =>{
+    this._user.vote(data.id, this.newPerson.comment)
     this.router.navigate(['']);
-    }
+    },
+    (err) => this._errorHandler.handleError(err)
     )
     
   }

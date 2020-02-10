@@ -7,7 +7,7 @@ import { MsalAuthService } from './services/msal-auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'onMangeOuFront';
+  title = "Où est-ce qu'on mange à midi";
   constructor(public auth: MsalAuthService){
   }
 

@@ -1,23 +1,24 @@
 <!--<div class="card" [class.border-primary]="isSelectedBlock()">-->
 <div class="card" [class.border-primary]="isSelectedRestaurant()">
   <div class="card-body">
-    <h5 class="card-title">{{ restaurant.name }} <span class="badge badge-primary">{{ restaurant.persons.length }} pers</span></h5>
+    <h5 class="card-title">{{ restaurant.name }} 
+      <!--<span *ngIf="restaurant.id !== -1" class="badge badge-primary">{{ restaurant.persons.length }} pers </span>
+      <span *ngIf="restaurant.id === -1" class="badge badge.warning">{{ restaurant.persons.length }} pers </span>-->
+      <span class="badge badge-primary">{{ restaurant.persons.length }} pers </span>
+      <svg *ngIf="user.restaurantVotedId === restaurant.id" class="bi bi-bookmark text-success" width="1em" height="1em"
+        viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M10 14l5 3V5a2 2 0 00-2-2H7a2 2 0 00-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V5a1 1 0 00-1-1H7a1 1 0 00-1 1v10.234z"
+          clip-rule="evenodd" />
+      </svg>
+    </h5>
     <h6 class="card-subtitle mb-2 text-muted">{{ restaurant.type }}</h6>
   </div>
 
-   <ul class="list-group list-group-flush">
+  <ul class="list-group list-group-flush">
     <li class="list-group-item">
-    <span class="">{{ restaurant.descr }}</span>
+      <span class="">{{ restaurant.descr }}</span>
       <br>
     </li>
-
-    <!--<li class="list-group-item">
-      <a href="#" class="btn btn-primary">Je veux y aller</a>
-    </li>-->
   </ul>
-
-  <!-- <div class="card-body"> -->
-    <!-- <span class="card-link" *ngIf="!blockHasTx()">Block has no transactions</span> -->
-    <!-- <span class="card-link" *ngIf="blockHasTx()">Contains {{block.transactions.length}} transactions</span> -->
-  <!-- </div> --> 
 </div>

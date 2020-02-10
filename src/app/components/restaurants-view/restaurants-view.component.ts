@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MsalAuthService } from 'src/app/services/msal-auth.service';
 
 @Component({
   selector: 'app-restaurants-view',
@@ -10,7 +11,7 @@ export class RestaurantsViewComponent implements OnInit {
   @Input() public restaurant;
   @Input() public selectedRestaurant;
 
-  constructor() { }
+  constructor(public user : MsalAuthService) { }
 
   ngOnInit() {
     console.log(this.restaurant);

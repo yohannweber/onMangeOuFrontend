@@ -2,52 +2,43 @@
 	<h1>Proposer un restaurant</h1>
 	<p>Vous avez envie d'autre chose ? N'hésitez plus, proposez le !</p>
 
-    <br>
+	<br>
 
 	<div class="form-group">
-	    <label for="restaurantName">Nom du restaurant</label>
-	    <input type="text" class="form-control" id="restaurantName" aria-describedby="restaurantNameHelp" [(ngModel)]="newRestaurant.name">
-	    <small id="restaurantName" class="form-text text-muted">
-	    	Le nom du restaurant.
-	    </small>
-  	</div>
+		<label for="restaurantName">Nom du restaurant</label>
+		<input type="text" class="form-control" id="restaurantName" aria-describedby="restaurantNameHelp"
+			[(ngModel)]="newRestaurant.name">
+		<small id="restaurantNameHelp" class="form-text text-muted">
+			Le nom du restaurant.
+		</small>
+	</div>
 
-  	<div class="form-group">
-	    <label for="restaurantType">Type</label>
-	    <input type="text" class="form-control" id="restaurantType" aria-describedby="restaurantTypeHelp" [(ngModel)]="newRestaurant.type">
-	    <small id="restaurantTypeHelp" class="form-text text-muted">
-	    	C'est le type du restaurant. Italien, chinois, indonésien. Ce genre d'informations.
-	    </small>
-  	</div>
+	<div class="form-group">
+		<label for="restaurantType">Type</label>
+		<input type="text" class="form-control" id="restaurantType" aria-describedby="restaurantTypeHelp"
+			[(ngModel)]="newRestaurant.type">
+		<small id="restaurantTypeHelp" class="form-text text-muted">
+			C'est le type du restaurant. Italien, chinois, indonésien. Ce genre d'informations.
+		</small>
+	</div>
 
-  	<div class="form-group">
-	    <label for="restaurantDescr">Description</label>
-	    <input type="text" class="form-control" id="restaurantDescr" aria-describedby="restaurantDescrHelp" [(ngModel)]="newRestaurant.descr">
-	    <small id="restaurantDescrHelp" class="form-text text-muted">
-	    	Quelques mots pour donner envie au gens de venir y manger avec vous !
-	    </small>
-      </div>
+	<div class="form-group">
+		<label for="restaurantDescr">Description</label>
+		<input type="text" class="form-control" id="restaurantDescr" aria-describedby="restaurantDescrHelp"
+			[(ngModel)]="newRestaurant.descr">
+		<small id="restaurantDescrHelp" class="form-text text-muted">
+			Quelques mots pour donner envie au gens de venir y manger avec vous !
+		</small>
+	</div>
 
-<!--
-      <h2>Dites nous en plus sur vous</h2>
-      <br>
-  
-      
-      <div class="form-group">
-          <label for="personName">Votre nom</label>
-          <input type="text" class="form-control" id="restaurantName" aria-describedby="restaurantNameHelp" [(ngModel)]="newPerson.name">
-          <small id="personNameHelp" class="form-text text-muted">
-              Votre nom. Pour qu'on puisse savoir qui a eu cette bonne idée.
-          </small>
-        </div>
     <div class="form-group">
         <label for="personComment">Commentaire pour ce midi</label>
         <input type="text" class="form-control" id="personComment" aria-describedby="personCommentHelp" [(ngModel)]="newPerson.comment">
         <small id="personCommentHelp" class="form-text text-muted">
             Parfois, il est bon d'avoir un plus d'informations.
         </small>
-    </div>-->
+    </div>
 
-  	<button (click)="createRestaurant()" type="submit" class="btn btn-primary">Je vais manger là bas !</button>
+	<button (click)="createRestaurant()" type="submit" class="btn btn-primary">Je vais manger là bas !</button>
 
 </div>
