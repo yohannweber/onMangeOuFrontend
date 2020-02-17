@@ -1,24 +1,15 @@
 <p *ngIf="persons.length === 0">Personne n'a encore voté</p>
 
-<div class="container">
-<table class="table table-hover" *ngIf="persons.length > 0">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nom</th>
-      <th scope="col">Commentaire</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr scope="row" *ngFor="let person of persons; index as index">
-      <td>{{index + 1}}</td>
-      <td>
-        {{person.name}}
-      </td>
-      <td>
-        {{person.comment}}<br>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+<div *ngIf="persons.length > 0" class="container grid-striped mx-2">
+  <div class="row font-weight-bold py-2">
+    <div class="col-xs-12 col-md-3">Nom</div>
+    <div class="col-xs-12 col-md-6">Commentaire</div>
+  </div>
+  <div class="row py-2" *ngFor="let person of persons; index as index">
+    <div class="col-xs-12 col-md-3">{{person.name}}</div>
+    <div class="col-xs-12 col-md-6">{{person.comment}}</div>
+  </div>
+  <br>
 </div>
+

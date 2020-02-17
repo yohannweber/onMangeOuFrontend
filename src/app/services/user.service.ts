@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 export class UserService {
 
   private restaurantUrl = "http://localhost:3000/api/restaurants/";
-  private _voted: boolean;
+  private _voted: boolean = true;
   private _restaurantVotedId: Restaurant["id"];
   private _userSubject = new Subject<Person>();
 
@@ -21,7 +21,7 @@ export class UserService {
     // Create persons observer object
     const myRestaurantObserver = {
       next: (x: Restaurant) => {
-        this._voted = true;
+        this._voted;
         this._restaurantVotedId = x.id;
         console.log("id rest : " + x.id);
       },

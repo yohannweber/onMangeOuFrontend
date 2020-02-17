@@ -18,38 +18,31 @@
 <br><br>
 
 <div class="container" *ngIf="restaurants.length > 0">
-    <div class="container">
-        <div class="row">
-            <div class="col-7">
-                <h1 *ngIf="selectedRestaurant.persons.length === 0" class="float-left">Soyez le premier !
-                </h1>
-                <h1 *ngIf="selectedRestaurant.persons.length > 1" class="float-left">
-                    {{selectedRestaurant.persons.length }} personnes veulent y aller
-                </h1>
-                <h1 *ngIf="selectedRestaurant.persons.length === 1" class="float-left">
-                    {{selectedRestaurant.persons.length }} personne veut y aller
-                </h1>
-            </div>
-            <div class="col" *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
-                <form class="form-inline float-right">
-
-                    <div class="form-group">
-                        <label class="sr-only" for="comment">Commentaire</label>
-                        <input type="text" class="form-control mr-sm-2" id="comment"
-                            placeholder="Je laisse un commentaire">
-
-                        <button class="btn btn-outline-success" type="button" aria-expanded="false"
-                            aria-controls="collapseExample"
-                            *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id"
-                            (click)="vote()">
-                            Et j'y vais !
-                        </button>
-                    </div>
-                </form>
-            </div>
+    <!--<div class="container">-->
+    <div class="row">
+        <div class="col-7">
+            <h1 *ngIf="selectedRestaurant.persons.length === 0" class="float-left">Soyez le premier !
+            </h1>
+            <h1 *ngIf="selectedRestaurant.persons.length > 1" class="float-left">
+                {{selectedRestaurant.persons.length }} personnes veulent y aller
+            </h1>
+            <h1 *ngIf="selectedRestaurant.persons.length === 1" class="float-left">
+                {{selectedRestaurant.persons.length }} personne veut y aller
+            </h1>
         </div>
-        <app-person-view [persons]="selectedRestaurantPersons">
-        </app-person-view>
+        <div class="col-4 my-auto form-inline float-right"
+            *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
+            <div class="form-group mr-2"
+                *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
+                <input type="text" class="form-control" id="comment" placeholder="Je laisse un commentaire"
+                    [(ngModel)]="person.comment">
 
-
+            </div>
+            <button class="btn btn-outline-success" type="submit" (click)="vote()">
+                Et j'y vais !
+            </button>
+        </div>
     </div>
+    <app-person-view [persons]="selectedRestaurantPersons">
+    </app-person-view>
+</div>

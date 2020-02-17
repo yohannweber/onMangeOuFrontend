@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { OnmangeouService, Person, Restaurant } from 'src/app/services/onmangeou.service';
 import { MsalAuthService } from 'src/app/services/msal-auth.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { MessageHandlerService, message } from 'src/app/services/message-handler.service';
-import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,7 +13,11 @@ import { Subscription } from 'rxjs';
 export class RestaurantViewerComponent implements OnInit {
 
   public restaurants = [];
-  public inputComment = "";
+  public person: Person = {
+    id : "",
+    name : "",
+    comment : ""
+  };
   public selectedRestaurantPersons = [];
   public selectedRestaurant = null;
   private _userSubscription: Subscription;
@@ -73,7 +76,8 @@ export class RestaurantViewerComponent implements OnInit {
   }
 
   public vote() {
-    this.user.vote(this.selectedRestaurant.id, this.inputComment);
+    this.user.vote(this.selectedRestaurant.id, this.person.comment);
+    this.person.comment = "";
   }
 
 

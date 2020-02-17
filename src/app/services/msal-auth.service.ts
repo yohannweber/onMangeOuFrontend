@@ -144,11 +144,8 @@ export class MsalAuthService {
     };
 
       console.log("auth is logon juste avant l'appel au serveur");
-      //console.log("id : " + this.auth.data.id);
       self.httpClient.get<Restaurant>("http://localhost:3000/api/surveys/" + self.data.id + '/restaurant/')
-      //this.httpClient.get<Restaurant>("http://localhost:3000/api/surveys/" + 'c94c675f-6f35-41b1-b19a-b4b8797edacd' + '/restaurant/')
         .subscribe(myRestaurantObserver);
-      //callback(JSON.parse(this.responseText));
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + accessToken);

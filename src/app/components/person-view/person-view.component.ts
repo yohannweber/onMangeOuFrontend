@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Person } from 'src/app/services/onmangeou.service';
 
 @Component({
   selector: 'app-person-view',
@@ -7,12 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PersonViewComponent implements OnInit {
 
-  @Input() public persons; 
+  @Input() public persons : Person[] ; 
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.persons);
   }
 
 }
