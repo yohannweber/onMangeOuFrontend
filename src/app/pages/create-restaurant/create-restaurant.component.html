@@ -31,43 +31,55 @@
 	<div class="container">
 		<h2>Ajoutez un nouveau restaurant</h2>
 		<p>Personne n'y avait encore pensé, vous l'avez fait !</p>
-		<div class="form-group">
-			<label for="restaurantName">Nom du restaurant</label>
-			<input type="text" class="form-control" id="restaurantName" aria-describedby="restaurantNameHelp"
-				[(ngModel)]="newRestaurant.name">
-			<small id="restaurantNameHelp" class="form-text text-muted">
-				Le nom du restaurant.
-			</small>
-		</div>
+		<form [formGroup]="registerForm" (ngSubmit)="createRestaurant()">
+			<div class="form-group">
+				<label for="restaurantName">Nom du restaurant</label>
+				<input type="text" class="form-control" formControlName="name" aria-describedby="restaurantNameHelp"
+					[(ngModel)]="newRestaurant.name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+				<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+					<div *ngIf="f.name.errors.required">Le nom est obligatoire</div>
+				</div>
+				<small id="restaurantNameHelp" class="form-text text-muted">
+					Le nom du restaurant.
+				</small>
+			</div>
 
-		<div class="form-group">
-			<label for="restaurantType">Type</label>
-			<input type="text" class="form-control" id="restaurantType" aria-describedby="restaurantTypeHelp"
-				[(ngModel)]="newRestaurant.type">
-			<small id="restaurantTypeHelp" class="form-text text-muted">
-				C'est le type du restaurant. Italien, chinois, indonésien. Ce genre d'informations.
-			</small>
-		</div>
+			<div class="form-group">
+				<label for="restaurantType">Type</label>
+				<input type="text" class="form-control" formControlName="type" aria-describedby="restaurantTypeHelp"
+					[(ngModel)]="newRestaurant.type" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+				<div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+					<div *ngIf="f.type.errors.required">Le type est obligatoire</div>
+				</div>
+				<small id="restaurantTypeHelp" class="form-text text-muted">
+					C'est le type du restaurant. Italien, chinois, indonésien. Ce genre d'informations.
+				</small>
+			</div>
 
-		<div class="form-group">
-			<label for="restaurantDescr">Description</label>
-			<input type="text" class="form-control" id="restaurantDescr" aria-describedby="restaurantDescrHelp"
-				[(ngModel)]="newRestaurant.descr">
-			<small id="restaurantDescrHelp" class="form-text text-muted">
-				Quelques mots pour donner envie au gens de venir y manger avec vous !
-			</small>
-		</div>
+			<div class="form-group">
+				<label for="restaurantDescr">Description</label>
+				<input type="text" class="form-control" formControlName="description"
+					aria-describedby="restaurantDescrHelp" [(ngModel)]="newRestaurant.descr"
+					[ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+				<div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+					<div *ngIf="f.description.errors.required">La description est obligatoire</div>
+				</div>
+				<small id="restaurantDescrHelp" class="form-text text-muted">
+					Quelques mots pour donner envie au gens de venir y manger avec vous !
+				</small>
+			</div>
 
-		<div class="form-group">
-			<label for="personComment">Commentaire pour ce midi</label>
-			<input type="text" class="form-control" id="personComment" aria-describedby="personCommentHelp"
-				[(ngModel)]="person.comment">
-			<small id="personCommentHelp" class="form-text text-muted">
-				Parfois, il est bon d'avoir un plus d'informations.
-			</small>
-		</div>
+			<div class="form-group">
+				<label for="personComment">Commentaire pour ce midi</label>
+				<input type="text" class="form-control" id="personComment" aria-describedby="personCommentHelp"
+					[(ngModel)]="person.comment">
+				<small id="personCommentHelp" class="form-text text-muted">
+					Parfois, il est bon d'avoir un plus d'informations.
+				</small>
+			</div>
 
-		<button (click)="createRestaurant()" type="submit" class="btn btn-primary">Je vais manger là bas !</button>
-
+			<button type="submit" class="btn btn-primary">Je vais manger là bas !</button>
+		</form>
 	</div>
+	<br>
 </div>

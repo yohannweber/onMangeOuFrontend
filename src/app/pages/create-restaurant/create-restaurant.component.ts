@@ -3,6 +3,7 @@ import { OnmangeouService, Restaurant, Person } from 'src/app/services/onmangeou
 import { Router } from '@angular/router';
 import { MsalAuthService } from 'src/app/services/msal-auth.service';
 import { RestaurantViewerComponent } from '../restaurant-viewer/restaurant-viewer.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-restaurant',
@@ -10,6 +11,8 @@ import { RestaurantViewerComponent } from '../restaurant-viewer/restaurant-viewe
   styleUrls: ['./create-restaurant.component.scss']
 })
 export class CreateRestaurantComponent implements OnInit {
+  registerForm: FormGroup;
+  submitted = false;
 
   public restaurants: Restaurant[] = [{
     id: "",
@@ -37,7 +40,7 @@ export class CreateRestaurantComponent implements OnInit {
   public selectedRestaurant = null;
 
 
-  constructor(private onMangeOuService: OnmangeouService, private router: Router, private _user: MsalAuthService, private _errorHandler: ErrorHandler) { }
+  constructor(private onMangeOuService: OnmangeouService, private router: Router, private _user: MsalAuthService, private _errorHandler: ErrorHandler, private formBuilder: FormBuilder) { }
 
 
   private loadData() {
@@ -57,14 +60,30 @@ export class CreateRestaurantComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      type: ['', Validators.required],
+      description: ['', Validators.required]
+  });
   }
 
   selectRestaurant(restaurant) {
     this.selectedRestaurant = restaurant;
   }
 
+    // convenience getter for easy access to form fields
+    get f() { return this.registerForm.controls; }
+
 
   createRestaurant() {
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+        return;
+    }
     
     console.log(this.newRestaurant);
     this.onMangeOuService

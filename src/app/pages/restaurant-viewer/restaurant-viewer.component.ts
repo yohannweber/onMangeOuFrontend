@@ -43,6 +43,7 @@ export class RestaurantViewerComponent implements OnInit {
           this.selectedRestaurant = this.restaurants[0];
         else
           this.selectedRestaurant = this.restaurants.find(p => p.id === this.user.restaurantVotedId);
+        console.log("selected restaurant :" + this.selectedRestaurant );
         this.onMangeOuService.getAllPersons(this.selectedRestaurant).subscribe(myPersonsObserver);
       },
       error: err => this.errorHandler.handleError(err),
