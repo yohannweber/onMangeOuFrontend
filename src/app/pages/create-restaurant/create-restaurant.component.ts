@@ -2,6 +2,7 @@ import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { OnmangeouService, Restaurant, Person } from 'src/app/services/onmangeou.service';
 import { Router } from '@angular/router';
 import { MsalAuthService } from 'src/app/services/msal-auth.service';
+import { RestaurantViewerComponent } from '../restaurant-viewer/restaurant-viewer.component';
 
 @Component({
   selector: 'app-create-restaurant',
@@ -10,44 +11,77 @@ import { MsalAuthService } from 'src/app/services/msal-auth.service';
 })
 export class CreateRestaurantComponent implements OnInit {
 
-  public newRestaurant : Restaurant = {
+  public restaurants: Restaurant[] = [{
+    id: "",
+    name: "",
+    type: "",
+    descr: "",
+    persons: []
+  }];
+
+  public restaurant = null;
+
+  public newRestaurant: Restaurant = {
     id: "",
     name: "",
     type: "",
     descr: "",
     persons: []
   };
-  public newPerson : Person = {
-    id : "",
-    name : "",
-    comment : ""
+  public person: Person = {
+    id: "",
+    name: "",
+    comment: ""
   };
-  
 
-  constructor(private onMangeOuService: OnmangeouService, private router : Router, private _user : MsalAuthService, private _errorHandler : ErrorHandler) { }
+  public selectedRestaurant = null;
 
-  ngOnInit() {
+
+  constructor(private onMangeOuService: OnmangeouService, private router: Router, private _user: MsalAuthService, private _errorHandler: ErrorHandler) { }
+
+
+  private loadData() {
+
+    const myRestaurantsObserver = {
+      next: (x: Restaurant[]) => {
+        this.restaurants = x;
+        this.selectedRestaurant = this.restaurants[0];
+      },
+      error: err => this._errorHandler.handleError(err),
+      complete: () => console.log('Restaurants Observer got a complete notification '),
+    };
+
+    this.onMangeOuService.getAllOldRestaurants().subscribe(myRestaurantsObserver);
+
   }
 
-  
+  ngOnInit() {
+    this.loadData();
+  }
+
+  selectRestaurant(restaurant) {
+    this.selectedRestaurant = restaurant;
+  }
+
+
   createRestaurant() {
-    let restaurant : Restaurant = {
-      id : "",
-      name: this.newRestaurant.name,
-      type: this.newRestaurant.type,
-      descr: this.newRestaurant.descr,
-      persons: []
-    };
-    console.log(restaurant);
-    this.onMangeOuService
-    .addRestaurant(restaurant)
-    .subscribe( (data : Restaurant) =>{
-    this._user.vote(data.id, this.newPerson.comment)
-    this.router.navigate(['']);
-    },
-    (err) => this._errorHandler.handleError(err)
-    )
     
+    console.log(this.newRestaurant);
+    this.onMangeOuService
+      .addRestaurant(this.newRestaurant)
+      .subscribe((data: Restaurant) => {
+        this._user.vote(data.id, this.person.comment)
+        this.router.navigate(['']);
+      },
+        (err) => this._errorHandler.handleError(err)
+      )
+
+  }
+
+  public vote() {
+    this._user.vote(this.selectedRestaurant.id, this.person.comment);
+    this.router.navigate(['']);
+    this.person.comment = "";
   }
 
 }

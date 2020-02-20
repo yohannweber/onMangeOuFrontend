@@ -5,7 +5,7 @@
   <form class="form-inline">
     <div class="form-check mb-2 mr-sm-2">
       <!--<button type="button" class="btn btn-outline-warning" *ngIf="auth.isLogon === true" (click)="auth.vote(-1)">Pas-->
-      <button type="button" class="btn" [class.btn-warning]="auth.restaurantVotedId === -1" [class.btn-outline-warning]="auth.restaurantVotedId !== -1" *ngIf="auth.isLogon === true" (click)="auth.vote(-1)">Pas
+      <button type="button" class="btn" [class.btn-warning]="auth.restaurantVotedId === '-1'" [class.btn-outline-warning]="auth.restaurantVotedId !== '-1'" *ngIf="auth.isLogon === true" (click)="auth.vote('-1')">Pas
         dispo ce midi</button>
     </div>
     <div class="form-check mb-2 mr-sm-2">

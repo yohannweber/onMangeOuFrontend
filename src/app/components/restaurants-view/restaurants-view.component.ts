@@ -17,7 +17,7 @@ export class RestaurantsViewComponent implements OnInit {
     console.log(this.restaurant);
   }
 
-  isSelectedRestaurant(restaurant){
+  isSelectedRestaurant(){
     return this.restaurant === this.selectedRestaurant
   }
 

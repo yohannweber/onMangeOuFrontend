@@ -5,12 +5,14 @@ import { Restaurant, Person } from './onmangeou.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { Subject } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private restaurantUrl = "http://localhost:3000/api/restaurants/";
+  private restaurantUrl = environment.apiEndpoint + "restaurants/";
   private _voted: boolean = true;
   private _restaurantVotedId: Restaurant["id"];
   private _userSubject = new Subject<Person>();
@@ -35,7 +37,7 @@ export class UserService {
       console.log("auth is logon juste avant l'appel au serveur");
       //console.log("id : " + this.auth.data.id);
       //this.httpClient.get<Restaurant>("http://localhost:3000/api/surveys/" + this.auth.data.id + '/restaurant/')
-      this.httpClient.get<Restaurant>("http://localhost:3000/api/surveys/" + 'c94c675f-6f35-41b1-b19a-b4b8797edacd' + '/restaurant/')
+      this.httpClient.get<Restaurant>(environment.apiEndpoint + "surveys/" + this.auth.data.id + '/restaurant/')
         .subscribe(myRestaurantObserver);
   }
 

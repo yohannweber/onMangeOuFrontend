@@ -7,6 +7,7 @@ import { Person, Restaurant } from './onmangeou.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { MessageHandlerService } from './message-handler.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class MsalAuthService {
   private _myMSALObj;
   public data;
   private _isProcessed: Promise<boolean>;
-  private restaurantUrl = "http://localhost:3000/api/restaurants/";
+  private restaurantUrl = environment.apiEndpoint + "restaurants/";
   private _voted: boolean;
   private _restaurantVotedId: Restaurant["id"] = "0";
   private _userSubject = new Subject<Person>();
@@ -144,7 +145,7 @@ export class MsalAuthService {
     };
 
       console.log("auth is logon juste avant l'appel au serveur");
-      self.httpClient.get<Restaurant>("http://localhost:3000/api/surveys/" + self.data.id + '/restaurant/')
+      self.httpClient.get<Restaurant>(environment.apiEndpoint + "surveys/" + self.data.id + '/restaurant/')
         .subscribe(myRestaurantObserver);
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous

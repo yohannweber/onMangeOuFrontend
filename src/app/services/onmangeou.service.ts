@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 export interface Person{
   id: string,
   name: string,
@@ -21,8 +23,9 @@ export interface Restaurant{
 })
 export class OnmangeouService {
 
-  private restaurantUrl = "http://localhost:3000/api/restaurants/";
-  private surveyUrl = "http://localhost:3000/api/surveys/";
+  private restaurantUrl = environment.apiEndpoint + "restaurants/";
+  private oldRestaurantUrl = environment.apiEndpoint + "oldRestaurants/";
+  private surveyUrl = environment.apiEndpoint + "surveys/";
   private handleError = "";
 
   constructor(private httpClient: HttpClient) {
@@ -30,6 +33,9 @@ export class OnmangeouService {
 
   public getAllRestaurants(): Observable<Restaurant[]>{
     return this.httpClient.get<Restaurant[]>(this.restaurantUrl);
+  }
+  public getAllOldRestaurants(): Observable<Restaurant[]>{
+    return this.httpClient.get<Restaurant[]>(this.oldRestaurantUrl);
   }
 
   public getAllPersons(restaurant: Restaurant ): Observable<Person[]>{

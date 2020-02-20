@@ -1,10 +1,11 @@
 <!--<div class="card" [class.border-primary]="isSelectedBlock()">-->
 <div class="card" [class.border-primary]="isSelectedRestaurant()">
   <div class="card-body">
-    <h5 class="card-title">{{ restaurant.name }} 
+    <h5 class="card-title">{{ restaurant.name }} <br>
       <!--<span *ngIf="restaurant.id !== -1" class="badge badge-primary">{{ restaurant.persons.length }} pers </span>
       <span *ngIf="restaurant.id === -1" class="badge badge.warning">{{ restaurant.persons.length }} pers </span>-->
-      <span class="badge badge-primary">{{ restaurant.persons.length }} pers </span>
+      <span class="badge badge-primary" *ngIf="restaurant.persons.length > 0">{{ restaurant.persons.length }} pers </span>
+      <span *ngIf="restaurant.persons.length === 0">&nbsp;</span>
       <svg *ngIf="user.restaurantVotedId === restaurant.id" class="bi bi-bookmark text-success" width="1em" height="1em"
         viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"

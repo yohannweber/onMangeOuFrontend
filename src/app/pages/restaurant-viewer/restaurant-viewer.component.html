@@ -5,7 +5,7 @@
         <button routerLink="/new/restaurant" class="btn btn-outline-success" type="button"
             *ngIf="user.isLogon === true">Proposer un restaurant</button>
     </div>
-    <p *ngIf="restaurants.length > 0">Les restaurants déjà selectionnés pour ce midi. Cliquez sur un bloc pour afficher
+    <p *ngIf="restaurants.length > 0">Les restaurants déjà sélectionnés pour ce midi. Cliquez sur un bloc pour afficher
         les personnes voulant y aller</p>
 </div>
 
@@ -30,17 +30,17 @@
                 {{selectedRestaurant.persons.length }} personne veut y aller
             </h1>
         </div>
-        <div class="col-4 my-auto form-inline float-right"
+        <div class="col-4 my-auto form-inline"
             *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
-            <div class="form-group mr-2"
-                *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
-                <input type="text" class="form-control" id="comment" placeholder="Je laisse un commentaire"
-                    [(ngModel)]="person.comment">
+                <div class="form-group mr-2"
+                    *ngIf="user.isLogon === true && user.restaurantVotedId !== selectedRestaurant.id">
+                    <input type="text" class="form-control" id="comment" placeholder="Je laisse un commentaire"
+                        [(ngModel)]="person.comment">
 
-            </div>
-            <button class="btn btn-outline-success" type="submit" (click)="vote()">
-                Et j'y vais !
-            </button>
+                </div>
+                <button class="btn btn-outline-success" type="submit" (click)="vote()">
+                    Et j'y vais !
+                </button>
         </div>
     </div>
     <app-person-view [persons]="selectedRestaurantPersons">
